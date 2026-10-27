@@ -4,7 +4,7 @@ Discord 群里一个像人一样的 AI 角色（灵感是 DeepSeek 社区的鲸�
 
 **照 `docs/plans/v1.md` 做**（背景调研在 `docs/research/deepseek-and-persona.md`，DeepSeek 的网址、模型、价格以 `docs/deepseek-notes.md` 为准）。
 
-这是**公开的开源 repo**：文档、注释、commit 讯息都不写个人资讯、私人项目名或任何金钥。
+这是**原始码公开的 repo**（PolyForm Noncommercial 1.0.0：非商业免费，商业用途需另行授权，见 README）：文档、注释、commit 讯息都不写个人资讯、私人项目名或任何金钥。新增第三方素材前先确认它的授权允许商业版一起使用。
 
 ## 工作约定
 

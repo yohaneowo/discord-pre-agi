@@ -6,6 +6,15 @@ Discord 群里像人一样的 AI 角色：有个性、记得群友和过去的�
 - 调研：[docs/research/deepseek-and-persona.md](docs/research/deepseek-and-persona.md)
 - 状态：阶段 0（骨架）；仅在群聊被直接 @ 时固定回应，不呼叫模型。
 
+## 授权：社区版与商业版
+
+原始码公开，采用 [PolyForm Noncommercial 1.0.0](LICENSE)（「原始码公开」授权，不是 OSI 定义的开源授权）：
+
+- **社区版（免费）**：个人学习、研究、兴趣专案、私人娱乐，以及慈善、教育、公共研究、政府等非营利机构使用，都可以免费使用、修改与散布（散布时要附上授权条款与 `Required Notice` 那一行）。
+- **商业版（需另行授权）**：任何商业用途——拿来赚钱、放进收费产品或服务、在公司业务中使用——都需要先取得商业授权。请在 GitHub 开 issue 联系作者。
+
+社群素材另有授权、不在本 repo 的授权范围内：「大肥鱼」形象是 DeepSeek 社群的二创；计划里提到的表情包图片是 CC BY-NC 4.0（不可商用），本 repo 没有收录。
+
 ## 本机准备
 
 使用 Node.js 22（至少 22.18）与 pnpm 9.15.9，版本分别记录在 `.nvmrc` 与 `package.json`。测试使用 Node.js 原生 TypeScript 设定载入与工作线程。
