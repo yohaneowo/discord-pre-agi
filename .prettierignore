@@ -1,0 +1,13 @@
+pnpm-lock.yaml
+dist/
+coverage/
+.cache/
+.pnpm-store/
+memory/
+data/
+.env
+.env.*
+AGENTS.md
+CLAUDE.md
+docs/plans/
+docs/research/

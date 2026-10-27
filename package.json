@@ -1,0 +1,33 @@
+{
+	"name": "discord-pre-agi",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Discord AI 角色的阶段 0 骨架",
+	"type": "module",
+	"packageManager": "pnpm@9.15.9",
+	"engines": {
+		"node": ">=22.18.0 <23"
+	},
+	"scripts": {
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint . && prettier --check .",
+		"format": "prettier --write .",
+		"test": "vitest run --configLoader native",
+		"dev": "pnpm build && node --env-file-if-exists=.env dist/index.js",
+		"build": "tsc -p tsconfig.build.json"
+	},
+	"dependencies": {
+		"discord.js": "14.26.4"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^22.0.0",
+		"eslint": "^10.13.0",
+		"eslint-config-prettier": "^10.1.0",
+		"prettier": "^3.6.0",
+		"typescript": "~5.9.3",
+		"typescript-eslint": "^8.72.1",
+		"vitest": "^5.0.5",
+		"vite": "^8.3.5"
+	}
+}

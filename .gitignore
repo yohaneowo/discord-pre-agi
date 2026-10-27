@@ -1,0 +1,16 @@
+node_modules/
+.env
+.env.*
+!.env.example
+# 人物卡、对话与日记保存在独立私人位置，不放进程式仓库。
+memory/
+data/
+*.sqlite
+*.db
+dist/
+coverage/
+.cache/
+.pnpm-store/
+*.log
+*.sqlite-*
+*.db-*
