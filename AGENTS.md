@@ -1,4 +1,4 @@
-# discord-pre-agi
+# whale-chan-pre-agi
 
 Discord 群里一个像人一样的 AI 角色（灵感是 DeepSeek 社区的鲸鱼娘「大肥鱼」）：有自己的个性、记得群友和过去发生的事、知道什么时候不说话。模型以 DeepSeek 为主（OpenAI 相容格式，只改设定就能换供应商）。
 

@@ -1,0 +1,48 @@
+[Unit]
+Description=dsh 独立测试服务
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=120
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=dsh
+Group=dsh
+WorkingDirectory=/srv/dsh
+Environment=HOME=/var/lib/dsh
+Environment=DSH_HOME=/var/lib/dsh/.dsh
+Environment=NODE_OPTIONS=--max-old-space-size=768
+Environment=PATH=/opt/dsh/node/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=-/var/lib/dsh/.env
+ExecStartPre=/usr/bin/python3 /opt/dsh/verify_isolation.py
+ExecStart=/usr/bin/python3 /opt/dsh/run_dsh.py
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=45
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=
+PrivateTmp=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/dsh /srv/dsh
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectProc=invisible
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+IPAddressAllow=localhost
+IPAddressDeny=10.0.0.0/8 172.16.0.0/12 192.168.0.0/16 169.254.0.0/16 fc00::/7 fe80::/10
+MemoryHigh=1100M
+MemoryMax=1400M
+MemorySwapMax=1536M
+CPUQuota=100%
+TasksMax=512
+
+[Install]
+WantedBy=multi-user.target

@@ -1,8 +1,8 @@
 {
-	"name": "discord-pre-agi",
+	"name": "whale-chan-pre-agi",
 	"version": "0.0.0",
 	"private": true,
-	"description": "Discord AI 角色的阶段 0 骨架",
+	"description": "具备短期上下文、插话判断与费用护栏的 Discord AI 角色",
 	"license": "PolyForm-Noncommercial-1.0.0",
 	"type": "module",
 	"packageManager": "pnpm@9.15.9",
@@ -18,17 +18,19 @@
 		"build": "tsc -p tsconfig.build.json"
 	},
 	"dependencies": {
+		"better-sqlite3": "^13.0.3",
 		"discord.js": "14.26.4"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
+		"@types/better-sqlite3": "^9.6.0",
 		"@types/node": "^22.0.0",
 		"eslint": "^10.13.0",
 		"eslint-config-prettier": "^10.1.0",
 		"prettier": "^3.6.0",
 		"typescript": "~5.9.3",
 		"typescript-eslint": "^8.72.1",
-		"vitest": "^5.0.5",
-		"vite": "^8.3.5"
+		"vite": "^8.3.5",
+		"vitest": "^5.0.5"
 	}
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readConfig } from '../src/config.js';
+import { readConfig, readDiscordConfig } from '../src/config.js';
 
 const validEnv = {
 	DISCORD_TOKEN: '测试凭证',
@@ -12,6 +12,34 @@ const validEnv = {
 };
 
 describe('集中环境设定', () => {
+	const discordEnv = {
+		DISCORD_TOKEN: validEnv.DISCORD_TOKEN,
+		DISCORD_CLIENT_ID: validEnv.DISCORD_CLIENT_ID,
+		OWNER_DISCORD_ID: validEnv.OWNER_DISCORD_ID,
+	};
+	it('固定回覆可只提供 Discord 设定，完整模型设定仍拒绝缺值', () => {
+		expect(readDiscordConfig(discordEnv)).toEqual({
+			discordToken: discordEnv.DISCORD_TOKEN,
+			discordClientId: discordEnv.DISCORD_CLIENT_ID,
+			ownerDiscordId: discordEnv.OWNER_DISCORD_ID,
+		});
+		expect(() => readConfig(discordEnv)).toThrow('LLM_BASE_URL');
+	});
+	it.each(Object.keys(discordEnv))('固定回覆仍要求 %s', (key) => {
+		expect(() => readDiscordConfig({ ...discordEnv, [key]: '' })).toThrow(key);
+	});
+	it.each(['DISCORD_CLIENT_ID', 'OWNER_DISCORD_ID'])(
+		'固定回覆仍检查 %s 的格式且不回显输入',
+		(key) => {
+			const invalid = '不可回显的设定值';
+			expect(() =>
+				readDiscordConfig({ ...discordEnv, [key]: invalid }),
+			).toThrow(key);
+			expect(() =>
+				readDiscordConfig({ ...discordEnv, [key]: invalid }),
+			).not.toThrow(invalid);
+		},
+	);
 	it('转换预算、保留 ID 字串并移除网址末尾斜线', () => {
 		expect(readConfig(validEnv)).toMatchObject({
 			llmBaseUrl: 'https://example.invalid/v1',

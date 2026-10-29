@@ -11,3 +11,5 @@ AGENTS.md
 CLAUDE.md
 docs/plans/
 docs/research/
+# 人设是直接交给模型的原文，排版即内容。
+deploy/social/persona-group.md

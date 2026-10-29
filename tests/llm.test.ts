@@ -82,6 +82,16 @@ describe('使用假 fetch 的模型客户端', () => {
 		{ ...completion, usage: { ...usage, completion_tokens: 1.5 } },
 		{ ...completion, usage: { ...usage, prompt_cache_hit_tokens: '0' } },
 		{ ...completion, usage: { ...usage, prompt_cache_miss_tokens: -2 } },
+		{ ...completion, usage: { ...usage, total_tokens: 1 } },
+		{ ...completion, usage: { ...usage, prompt_cache_hit_tokens: 13 } },
+		{
+			...completion,
+			usage: {
+				...usage,
+				prompt_cache_hit_tokens: 8,
+				prompt_cache_miss_tokens: 8,
+			},
+		},
 	])('拒绝错误的内容或用量格式', async (value) => {
 		const fakeFetch = vi
 			.fn<typeof fetch>()

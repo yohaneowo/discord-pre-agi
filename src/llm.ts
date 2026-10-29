@@ -61,6 +61,16 @@ function parseCompletion(value: unknown): {
 		usage.prompt_cache_hit_tokens = count('prompt_cache_hit_tokens');
 	if (raw.prompt_cache_miss_tokens !== undefined)
 		usage.prompt_cache_miss_tokens = count('prompt_cache_miss_tokens');
+	if (
+		usage.total_tokens !== usage.prompt_tokens + usage.completion_tokens ||
+		(usage.prompt_cache_hit_tokens ?? 0) > usage.prompt_tokens ||
+		(usage.prompt_cache_miss_tokens ?? 0) > usage.prompt_tokens ||
+		(usage.prompt_cache_hit_tokens !== undefined &&
+			usage.prompt_cache_miss_tokens !== undefined &&
+			usage.prompt_cache_hit_tokens + usage.prompt_cache_miss_tokens !==
+				usage.prompt_tokens)
+	)
+		throw invalid();
 	return { content: choice.message.content, usage };
 }
 
@@ -78,7 +88,15 @@ export function createLlmClient(
 		throw new Error('模型逾时毫秒数必须是有效的正整数');
 	}
 	return {
-		async complete(messages: readonly ChatMessage[]) {
+		async complete(
+			messages: readonly ChatMessage[],
+			request: { maxTokens?: number; nonThinking?: boolean } = {},
+		) {
+			if (
+				request.maxTokens !== undefined &&
+				(!Number.isSafeInteger(request.maxTokens) || request.maxTokens < 1)
+			)
+				throw new Error('输出 token 上限必须是正整数');
 			const controller = new AbortController();
 			const timer = setTimeout(() => controller.abort(), timeoutMs);
 			try {
@@ -94,6 +112,12 @@ export function createLlmClient(
 							model: config.llmModel,
 							messages,
 							stream: false,
+							...(request.maxTokens === undefined
+								? {}
+								: { max_tokens: request.maxTokens }),
+							...(request.nonThinking
+								? { thinking: { type: 'disabled' } }
+								: {}),
 						}),
 						signal: controller.signal,
 						redirect: 'error',
